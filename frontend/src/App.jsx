@@ -5,12 +5,18 @@ import {
   createRoutesFromElements,
   Route,
 } from "react-router-dom";
-import RootLayout from "./components/RootLayout/RootLayout";
-import Home from "./components/Home/Home";
-import Nutrients from "./components/NutrientPlan/Nutrients";
-import Consulting from "./components/Consulting/Consulting";
-import Shop from "../src/components/Shop/Shop";
+import RootLayout from "../src/components/RootLayout/RootLayout";
+import Home from "./components/Home1/Home/Home";
+import Nutrients from "./components/Home1/NutrientPlan/Nutrients";
+import Consulting from "./components/Home1/Consulting/Consulting";
+import Shop from "./components/Home1/Shop/Shop";
 import Cart from "./components/Cart/Cart";
+import { loadHomePage } from "./handleAPIs";
+import { useEffect, useState } from "react";
+
+
+
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -25,6 +31,13 @@ const router = createBrowserRouter(
 );
 
 function App() {
+
+  let [homeData, setHomeData] = useState();
+  useEffect(()=>{
+    loadHomePage(setHomeData);
+    console.log(homeData);
+  }, [])
+
   return (
     <>
       <RouterProvider router={router} />
